@@ -3,13 +3,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .card-container {
     padding: 1em;
+    margin: 4em;
 }
 
 .card-item {
     text-align: center;
-    margin: 1em;
+    margin: 2em 0.75em;
 }

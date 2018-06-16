@@ -15,6 +15,9 @@ class Login extends React.Component {
     render() {
         return(
         <div className="container">
+            <Typography variant="title" className="card-item" color="primary"> 
+                Remote Class Notes
+            </Typography>
             <Card className='card-container'>
                 <CardContent>
                     <Typography variant="headline" color="primary" className="card-item">
