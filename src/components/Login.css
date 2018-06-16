@@ -6,12 +6,10 @@
 }
 
 .card-container {
-    height: 50vh;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
+    padding: 1em;
 }
 
-.card-heading {
-    flex-grow: 3;
+.card-item {
+    text-align: center;
+    margin: 1em;
 }

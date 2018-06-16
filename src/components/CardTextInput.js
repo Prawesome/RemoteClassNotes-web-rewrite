@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import CardTextInputStyle from './CardTextInput.css';
 import TextField from '@material-ui/core/TextField/TextField';
+import LoginStyle from './Login.css';
 
 class CardTextInput extends Component {
 
@@ -10,7 +10,7 @@ class CardTextInput extends Component {
 
     render() {
         return (
-            <div className="card-input">
+            <div className="card-item">
                 <TextField 
                     {...this.props}
                     required="true"

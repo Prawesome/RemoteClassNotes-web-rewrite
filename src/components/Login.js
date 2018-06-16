@@ -17,8 +17,8 @@ class Login extends React.Component {
         <div className="container">
             <Card className='card-container'>
                 <CardContent>
-                    <Typography variant="headline" color="primary" className="card-heading">
-                    LOGIN
+                    <Typography variant="headline" color="primary" className="card-item">
+                    Login
                     </Typography>
                     <CardInput 
                         name="login-email"
@@ -31,7 +31,10 @@ class Login extends React.Component {
                         placeholder="Password"
                         type="password"
                     />
-                    <Button variant="raised" color="primary">Submit</Button>
+                    <div className="card-item">
+                        <Button variant="raised" color="primary" >Submit</Button>
+                    </div>
+                    
                 </CardContent>
             </Card>
         </div>
