@@ -1,35 +1,37 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField/TextField';
 import Typography from '@material-ui/core/Typography/Typography';
 import LoginStyle from './Login.css';
 import Card from '@material-ui/core/Card/Card';
 import { CardContent } from '@material-ui/core';
+import Button from '@material-ui/core/Button/Button';
+import CardInput from './CardTextInput';
 
 class Login extends React.Component {
+
+    constructor(props) {
+        super(props);
+    };
+
     render() {
         return(
         <div className="container">
             <Card className='card-container'>
                 <CardContent>
-                    <Typography variant="headline" color="primary">
+                    <Typography variant="headline" color="primary" className="card-heading">
                     LOGIN
                     </Typography>
-                    <TextField 
-                        autoFocus={true}
+                    <CardInput 
                         name="login-email"
                         placeholder="Email ID"
                         type="email"
-                        required="true"
-                        fullWidth="true"
-                    />
-                    <TextField 
                         autoFocus={true}
+                    />
+                    <CardInput 
                         name="login-password"
                         placeholder="Password"
                         type="password"
-                        required="true"
-                        fullWidth="true"
                     />
+                    <Button variant="raised" color="primary">Submit</Button>
                 </CardContent>
             </Card>
         </div>
