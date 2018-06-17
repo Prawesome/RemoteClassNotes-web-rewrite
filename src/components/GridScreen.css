@@ -5,8 +5,13 @@
     justify-content: center;
     align-items: center;
     align-content: space-around;
+    padding-top: 5em;
 }
 
 .grid-item-container {
-    margin: 0.25em;
+    margin-left: 0.5em;
+    text-align: center;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
 }
