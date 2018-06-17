@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GridStyle from './GridScreen.css';
+import { GridList, GridListTile, Card, CardContent, Typography } from '@material-ui/core';
 
 class GridScreen extends Component {
 
@@ -7,16 +8,27 @@ class GridScreen extends Component {
         super(props);
     }
 
-    state = {
-        subjects: ['DWM', 'OS', 'Android', 'iOS', 'DS', 'EM', 'MPMC', 'WTF', 'HOI', 'HELLO', 'OSS']
-    };
+    subjects = ['DWM', 'OS', 'Android', 'iOS', 'DS', 'EM', 'MPMC', 'WTF', 'HOI', 'HELLO', 'OSS'];
 
     render() {
         return(
-            <ul>
-                {this.state.subjects.map(subject => (
-                    <li>{subject}</li>))}
-            </ul>
+            <div className="grid-container">
+                <GridList cols={5}>
+                    {this.subjects.map( (subject, index) => 
+                    <div className="grid-item-container">
+                        <GridListTile key={index}>
+                            <Card>
+                                <CardContent classes='test'>
+                                    <Typography variant="subheading" color="primary">
+                                        {subject}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </GridListTile>
+                    </div>
+                    )}
+                </GridList>
+            </div>
         );
     }
 }

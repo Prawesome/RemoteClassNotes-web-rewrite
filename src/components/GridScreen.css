@@ -1,7 +1,12 @@
-.container {
-    height: 100vh;
+.grid-container {
+    padding: 1em;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    align-content: space-around;
+}
+
+.grid-item-container {
+    margin: 0.25em;
 }
