@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GridStyle from './GridScreen.css';
-import { GridList, GridListTile, Card, CardContent, Typography } from '@material-ui/core';
+import { GridList, GridListTile, Card, CardContent, Typography, createMuiTheme } from '@material-ui/core';
 
 class GridScreen extends Component {
 
@@ -12,20 +12,18 @@ class GridScreen extends Component {
 
     render() {
         return(
-            <div className="grid-container">
-                <GridList cols={5}>
+            <div className="grid-outter-container">
+                <GridList cols={5} className="grid-inner-container">
                     {this.subjects.map( (subject, index) => 
-                    <div className="grid-item-container">
-                        <GridListTile key={index}>
-                            <Card>
-                                <CardContent classes='test'>
-                                    <Typography variant="subheading" color="primary">
-                                        {subject}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </GridListTile>
-                    </div>
+                    <GridListTile key={index} className="grid-item-container">
+                        <Card className="card">
+                            <CardContent>
+                                <Typography variant="subheading" color="primary">
+                                    {subject}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </GridListTile>
                     )}
                 </GridList>
             </div>
