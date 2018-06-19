@@ -1,18 +1,16 @@
 import React, { Component } from "react";
 import GridStyle from "./GridScreen.css";
-import { GridList } from "@material-ui/core";
-import {
-  GridListTile,
-  Card,
-  CardContent,
-  Typography,
-  Divider
-} from "@material-ui/core";
+import { GridList, GridListTile } from "@material-ui/core";
 import DownloadCard from "./DownloadCard";
+import SubjectCard from "./SubjectCard";
 
 class GridScreen extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+        subjectSelected: false
+    }
   }
 
   files = [
@@ -58,38 +56,13 @@ class GridScreen extends Component {
           {this.files.map((file, index) => (
             <GridListTile key={index} className="grid-item-container">
               <DownloadCard file={file} />
-
-              {/* <Card>
-                <CardContent>
-                  <Typography
-                    variant="title"
-                    color="primary"
-                    align="center"                    
-                  >
-                    {file.name}
-                  </Typography>
-                  <Divider />
-                  <Typography variant="body1" color="secondary">
-                    {file.subject}
-                  </Typography>
-                </CardContent>
-              </Card> */}
             </GridListTile>
           ))};
-          {/* {this.subjects.map((subject, index) => (
-            <GridListTile
-              key={index}
-              className="grid-item-container"
-            >
-              <Card className="card">
-                <CardContent>
-                  <Typography variant="subheading" color="primary">
-                    {subject}
-                  </Typography>
-                </CardContent>
-              </Card>
+          {this.subjects.map((subject, index) => (
+            <GridListTile key={index} className="grid-item-container">
+              <SubjectCard subject={subject} />
             </GridListTile>
-          ))} */}
+          ))}
         </GridList>
       </div>
     );
