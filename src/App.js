@@ -7,7 +7,7 @@ import UploadScreen from './components/UploadScreen';
 
 class App extends Component {
   render() {
-    return ( <UploadScreen />
+    return ( <GridScreen />
     );
   }
 }

@@ -1,6 +1,8 @@
 .grid-outter-container {
     padding: 1em;
     padding-top: 2em;
+    height: 100%;
+    width: 100%;
 }
 
 .grid-inner-container {
@@ -12,7 +14,11 @@
 
 .grid-item-container {
     margin-left: 0.5em;
-    text-align: center;
+
+}
+
+.center-text {
+    text-align: center;  
 }
 
 .card {
