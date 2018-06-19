@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import GridStyle from "./GridScreen.css";
 import { GridList } from "@material-ui/core";
-import DownloadGrid from "./DownloadGrid";
 import {
   GridListTile,
   Card,
@@ -9,6 +8,7 @@ import {
   Typography,
   Divider
 } from "@material-ui/core";
+import DownloadCard from "./DownloadCard";
 
 class GridScreen extends Component {
   constructor(props) {
@@ -52,17 +52,14 @@ class GridScreen extends Component {
   //TODO: SHIT TON OF REFACTORNING TO BE DONE
 
   render() {
-
-    let subjectCards = (
-
-    );
-    
     return (
       <div className="grid-outter-container">
         <GridList cols={5} className="grid-inner-container">
           {this.files.map((file, index) => (
             <GridListTile key={index} className="grid-item-container">
-              <Card>
+              <DownloadCard file={file} />
+
+              {/* <Card>
                 <CardContent>
                   <Typography
                     variant="title"
@@ -76,7 +73,7 @@ class GridScreen extends Component {
                     {file.subject}
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
             </GridListTile>
           ))};
           {/* {this.subjects.map((subject, index) => (
