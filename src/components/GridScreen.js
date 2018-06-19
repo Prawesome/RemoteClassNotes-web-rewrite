@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import GridStyle from './GridScreen.css';
-import { GridList, GridListTile, Card, CardContent, Typography, createMuiTheme, Divider } from '@material-ui/core';
+import { GridList} from '@material-ui/core';
+import DownloadGrid from './DownloadGrid';
+import { GridListTile, Card, CardContent, Typography, Divider } from '@material-ui/core'
 
 class GridScreen extends Component {
 
     constructor(props) {
         super(props);
     }
-
-    subjects = ['DWM', 'OS', 'Android', 'iOS', 'DS', 'EM', 'MPMC', 'WTF', 'HOI', 'HELLO', 'OSS'];
 
     files = [
         {
@@ -28,31 +28,33 @@ class GridScreen extends Component {
             subject: 'odra'
         }
     ];
+
+    subjects = ['DWM', 'OS', 'Android', 'iOS', 'DS', 'EM', 'MPMC', 'WTF', 'HOI', 'HELLO', 'OSS'];
     
     //TODO: ROUTING
+    //TODO: SHIT TON OF REFACTORNING TO BE DONE
 
     render() {
         return(
             <div className="grid-outter-container">
                 <GridList cols={5} className="grid-inner-container">
-                    {
-                        this.files.map( (file, index) => (
-                            <GridListTile key={index} >
-                                {console.log(file.name)}
-                                <Card>
-                                    <CardContent>
-                                        <Typography variant="title" color="primary" className="center-text">
-                                        {file.name}
-                                        </Typography>
-                                        <Divider />
-                                        <Typography variant="body1" color="secondary">
-                                        {file.subject}
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </GridListTile>
-                        ))
-                    }
+
+                {this.files.map( (file, index) => (
+                <GridListTile key={index} >
+                    <Card>
+                        <CardContent>
+                            <Typography variant="title" color="primary" className="center-text">
+                            {file.name}
+                            </Typography>
+                            <Divider />
+                            <Typography variant="body1" color="secondary">
+                            {file.subject}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </GridListTile>
+            ))};
+                    
                     {/* {this.subjects.map( (subject, index) => 
                     <GridListTile key={index} className="grid-item-container center-text">
                         <Card className="card">
