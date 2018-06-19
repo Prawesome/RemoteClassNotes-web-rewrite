@@ -12,3 +12,7 @@
     width: 80%;
     height: 3em;
 }
+
+.hidden-input {
+    display: none;
+}
