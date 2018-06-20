@@ -4,7 +4,7 @@ import "./Login.css";
 import { Card, CardContent } from "@material-ui/core";
 import Button from "@material-ui/core/Button/Button";
 import CardInput from "./CardTextInput";
-import { Redirect } from "react-router-dom";
+import { Redirect, Switch } from "react-router-dom";
 import GridScreen from "./GridScreen";
 import firebase from "./Firebase";
 
@@ -22,8 +22,19 @@ class Login extends React.Component {
         value: "",
         isError: false,
         errorText: ""
-      }
+      },
+      isLoggedIn: false
     };
+  }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          isLoggedIn: true
+        });
+      }
+    });
   }
 
   mailFieldHandler = event => {
@@ -56,12 +67,12 @@ class Login extends React.Component {
 
   removeEmailError = () => {
     this.setState({
-        mail: {
-          ...this.state.mail,
-          isError: false,
-          errorText: ""
-        }
-      });
+      mail: {
+        ...this.state.mail,
+        isError: false,
+        errorText: ""
+      }
+    });
   };
 
   setPasswordError = () => {
@@ -77,7 +88,10 @@ class Login extends React.Component {
   loginHandler = () => {
     firebase
       .auth()
-      .signInWithEmailAndPassword(this.state.mail.value, this.state.password.value)
+      .signInWithEmailAndPassword(
+        this.state.mail.value,
+        this.state.password.value
+      )
       .catch(error => {
         switch (error.code) {
           case "auth/invalid-email":
@@ -100,6 +114,8 @@ class Login extends React.Component {
   render() {
     return (
       <div className="container">
+        {/* TODO: IMPROVE THIS. TEMPORARY HACK */}
+        {/* {this.state.isLoggedIn ? <Redirect to="/subjects" /> : ''} */}
         <Typography variant="title" className="card-item" color="primary">
           Remote Class Notes
         </Typography>
@@ -121,6 +137,7 @@ class Login extends React.Component {
               value={this.state.mail.value}
               error={this.state.mail.isError}
               helperText={this.state.mail.errorText}
+              icon="AccountCircle"
             />
             <CardInput
               name="login-password"
@@ -130,6 +147,7 @@ class Login extends React.Component {
               value={this.state.password.value}
               error={this.state.password.isError}
               helperText={this.state.password.errorText}
+              icon="Lock"
             />
             <div className="card-item">
               <Button
