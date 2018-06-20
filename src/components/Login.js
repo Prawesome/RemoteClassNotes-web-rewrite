@@ -1,6 +1,6 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography/Typography";
-import LoginStyle from "./Login.css";
+import "./Login.css";
 import { Card, CardContent } from "@material-ui/core";
 import Button from "@material-ui/core/Button/Button";
 import CardInput from "./CardTextInput";

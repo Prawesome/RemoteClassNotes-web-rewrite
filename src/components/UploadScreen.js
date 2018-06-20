@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, LinearProgress } from "@material-ui/core";
 import FileUpload from "@material-ui/icons/FileUpload";
-import UploadScreenStyles from "./UploadScreen.css";
+import "./UploadScreen.css";
 
 class UploadScreen extends Component {
   //TODO: MULTIPLE FILE SELECTED MANAGER

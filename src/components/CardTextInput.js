@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField/TextField';
-import LoginStyle from './Login.css';
+import './Login.css';
 
 class CardTextInput extends Component {
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GridStyle from "./GridScreen.css";
+import "./GridScreen.css";
 import { GridList, GridListTile } from "@material-ui/core";
 import DownloadCard from "./DownloadCard";
 import SubjectCard from "./SubjectCard";
