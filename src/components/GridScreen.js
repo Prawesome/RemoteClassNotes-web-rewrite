@@ -3,6 +3,7 @@ import GridStyle from "./GridScreen.css";
 import { GridList, GridListTile } from "@material-ui/core";
 import DownloadCard from "./DownloadCard";
 import SubjectCard from "./SubjectCard";
+import { BrowserRouter as Router, Link, Switch } from "react-router-dom";
 
 class GridScreen extends Component {
   constructor(props) {

@@ -1,13 +1,16 @@
-import React, {
-  Component
-} from 'react';
-import Login from './components/Login'
-import GridScreen from './components/GridScreen';
-import UploadScreen from './components/UploadScreen';
+import React, { Component } from "react";
+import Login from "./components/Login";
+import { Route } from "react-router-dom";
+import Subjects from "./components/GridScreen";
 
 class App extends Component {
   render() {
-    return ( <GridScreen />
+    return (
+      <div>
+        {/*  <Route path='/' exact component={} /> */}
+        <Route path="/login" component={Login} />
+        <Route path="/subjects" component={Subjects} />
+      </div>
     );
   }
 }
