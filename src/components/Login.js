@@ -49,9 +49,19 @@ class Login extends React.Component {
       mail: {
         ...this.state.mail,
         isError: true,
-        errorText: "Invalid/Incorrect Email"
+        errorText: "Badly formatted email"
       }
     });
+  };
+
+  removeEmailError = () => {
+    this.setState({
+        mail: {
+          ...this.state.mail,
+          isError: false,
+          errorText: ""
+        }
+      });
   };
 
   setPasswordError = () => {
@@ -59,7 +69,7 @@ class Login extends React.Component {
       password: {
         ...this.state.password,
         isError: true,
-        errorText: "Incorrect password"
+        errorText: "Incorrect email or password"
       }
     });
   };
@@ -78,6 +88,7 @@ class Login extends React.Component {
             break;
           case "auth/wrong-password":
             this.setPasswordError();
+            this.removeEmailError();
             break;
           default:
             break;
