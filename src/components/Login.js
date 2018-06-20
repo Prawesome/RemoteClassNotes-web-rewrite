@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button/Button";
 import CardInput from "./CardTextInput";
 import { Redirect } from "react-router-dom";
 import GridScreen from "./GridScreen";
+import firebase from "./Firebase";
 
 class Login extends React.Component {
   constructor(props) {
@@ -27,6 +28,15 @@ class Login extends React.Component {
     this.setState({
       password: event.target.value
     });
+  };
+
+  loginHandler = () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(this.state.mail, this.state.password)
+      .catch(error => {
+          
+      });
   };
 
   render() {
@@ -60,7 +70,11 @@ class Login extends React.Component {
               value={this.state.password}
             />
             <div className="card-item">
-              <Button variant="raised" color="primary">
+              <Button
+                variant="raised"
+                color="primary"
+                onClick={this.loginHandler}
+              >
                 Submit
               </Button>
             </div>
