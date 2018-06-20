@@ -1,14 +1,11 @@
 import React from "react";
-import {
-    Card,
-    CardContent,
-    Typography
-  } from "@material-ui/core";
+import { Card, CardContent, Typography } from "@material-ui/core";
+import "./GridScreen.css";
 
 const SubjectCard = props => (
   <Card className="card">
     <CardContent>
-      <Typography variant="subheading" color="primary">
+      <Typography variant="subheading" color="primary" align="center">
         {props.subject}
       </Typography>
     </CardContent>

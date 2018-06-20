@@ -19,7 +19,7 @@ class CardTextInput extends Component {
           fullWidth={true}
           InputProps={{
             startAdornment: (
-              <InputAdornment position="start">
+              <InputAdornment className="icon-text-field" position="start" color="primary">
                 {icon}
               </InputAdornment>
             )
