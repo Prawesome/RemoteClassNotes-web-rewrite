@@ -85,6 +85,13 @@ class Login extends React.Component {
     });
   };
 
+  keyPressHandler = (event) => {
+      if(event.keyCode === 13) {
+          this.loginHandler();
+          console.log('Logged');
+      }
+  }
+
   loginHandler = () => {
     firebase
       .auth()
@@ -113,7 +120,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container" onKeyDown={this.keyPressHandler}>
         {/* TODO: IMPROVE THIS. TEMPORARY HACK */}
         {/* {this.state.isLoggedIn ? <Redirect to="/subjects" /> : ''} */}
         <Typography variant="title" className="card-item" color="primary">
