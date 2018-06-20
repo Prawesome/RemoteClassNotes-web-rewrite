@@ -14,7 +14,7 @@ class CardTextInput extends Component {
                 <TextField 
                     {...this.props}
                     required="true"
-                    fullWidth="true"
+                    fullWidth={true}
                 />
             </div>
         )
