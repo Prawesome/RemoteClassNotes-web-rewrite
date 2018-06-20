@@ -4,13 +4,30 @@ import "./Login.css";
 import { Card, CardContent } from "@material-ui/core";
 import Button from "@material-ui/core/Button/Button";
 import CardInput from "./CardTextInput";
-import { Link } from "react-router-dom";
-import GridScreen from './GridScreen';
+import { Redirect } from "react-router-dom";
+import GridScreen from "./GridScreen";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      mail: "",
+      password: ""
+    };
   }
+
+  mailFieldHandler = event => {
+    this.setState({
+      mail: event.target.value
+    });
+  };
+
+  passwordFieldHandler = event => {
+    this.setState({
+      password: event.target.value
+    });
+  };
 
   render() {
     return (
@@ -32,21 +49,20 @@ class Login extends React.Component {
               placeholder="Email ID"
               type="email"
               autoFocus={true}
+              onChange={this.mailFieldHandler}
+              value={this.state.mail}
             />
             <CardInput
               name="login-password"
               placeholder="Password"
               type="password"
+              onChange={this.passwordFieldHandler}
+              value={this.state.password}
             />
             <div className="card-item">
-              <Link to='/subjects'>
-                <Button
-                  variant="raised"
-                  color="primary"
-                >
-                  Submit
-                </Button>
-              </Link>
+              <Button variant="raised" color="primary">
+                Submit
+              </Button>
             </div>
           </CardContent>
         </Card>
