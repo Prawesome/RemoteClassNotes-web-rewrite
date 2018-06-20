@@ -13,7 +13,7 @@ class CardTextInput extends Component {
             <div className="card-item">
                 <TextField 
                     {...this.props}
-                    required="true"
+                    required={true}
                     fullWidth={true}
                 />
             </div>

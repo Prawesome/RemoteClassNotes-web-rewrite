@@ -13,29 +13,76 @@ class Login extends React.Component {
     super(props);
 
     this.state = {
-      mail: "",
-      password: ""
+      mail: {
+        value: "",
+        isError: false,
+        errorText: ""
+      },
+      password: {
+        value: "",
+        isError: false,
+        errorText: ""
+      }
     };
   }
 
   mailFieldHandler = event => {
     this.setState({
-      mail: event.target.value
+      mail: {
+        ...this.state.mail,
+        value: event.target.value
+      }
     });
   };
 
   passwordFieldHandler = event => {
     this.setState({
-      password: event.target.value
+      password: {
+        ...this.state.password,
+        value: event.target.value
+      }
+    });
+  };
+
+  setEmailError = () => {
+    this.setState({
+      mail: {
+        ...this.state.mail,
+        isError: true,
+        errorText: "Invalid/Incorrect Email"
+      }
+    });
+  };
+
+  setPasswordError = () => {
+    this.setState({
+      password: {
+        ...this.state.password,
+        isError: true,
+        errorText: "Incorrect password"
+      }
     });
   };
 
   loginHandler = () => {
     firebase
       .auth()
-      .signInWithEmailAndPassword(this.state.mail, this.state.password)
+      .signInWithEmailAndPassword(this.state.mail.value, this.state.password.value)
       .catch(error => {
-          
+        switch (error.code) {
+          case "auth/invalid-email":
+          case "auth/user-disabled":
+          case "auth/user-not-found":
+          case "auth/argument-error":
+            this.setEmailError();
+            break;
+          case "auth/wrong-password":
+            this.setPasswordError();
+            break;
+          default:
+            break;
+        }
+        console.log(error);
       });
   };
 
@@ -60,14 +107,18 @@ class Login extends React.Component {
               type="email"
               autoFocus={true}
               onChange={this.mailFieldHandler}
-              value={this.state.mail}
+              value={this.state.mail.value}
+              error={this.state.mail.isError}
+              helperText={this.state.mail.errorText}
             />
             <CardInput
               name="login-password"
               placeholder="Password"
               type="password"
               onChange={this.passwordFieldHandler}
-              value={this.state.password}
+              value={this.state.password.value}
+              error={this.state.password.isError}
+              helperText={this.state.password.errorText}
             />
             <div className="card-item">
               <Button
