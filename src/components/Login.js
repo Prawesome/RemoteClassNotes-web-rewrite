@@ -122,7 +122,7 @@ class Login extends React.Component {
     return (
       <div className="container" onKeyDown={this.keyPressHandler}>
         {/* TODO: IMPROVE THIS. TEMPORARY HACK */}
-        {/* {this.state.isLoggedIn ? <Redirect to="/subjects" /> : ''} */}
+        {this.state.isLoggedIn ? <Redirect to="/subjects" /> : ''}
         <Typography variant="title" className="card-item" color="primary">
           Remote Class Notes
         </Typography>
