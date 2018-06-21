@@ -14,7 +14,7 @@ class FileScreen extends Component {
   }
 
   componentWillMount() {
-    this.getData(this.props.subject);
+    this.getData(this.props.location.state.props.subject);    
   }
 
   getData = subject => {
