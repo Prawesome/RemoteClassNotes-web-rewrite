@@ -6,11 +6,11 @@ const DownloadCard = props => (
   <Card className="card">
     <CardContent>
       <Typography variant="title" color="primary" align="center">
-        {props.file.name}
+        {props.file.fileName}
       </Typography>
       <Divider />
       <Typography variant="body1" color="secondary">
-        {props.file.subject}
+        {props.file.subjectName }
       </Typography>
     </CardContent>
   </Card>

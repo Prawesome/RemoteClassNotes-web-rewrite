@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Login from "./components/Login";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Subjects from "./components/SubjectScreen";
+import Files from "./components/FileScreen";
 
 class App extends Component {
   render() {
@@ -9,6 +10,7 @@ class App extends Component {
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/subjects" component={Subjects} />
+        <Route path="/files" component={Files} />
         <Redirect from="/" to="/login" />
       </Switch>
     );

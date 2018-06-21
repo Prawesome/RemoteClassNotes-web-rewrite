@@ -9,7 +9,6 @@ class SubjectScreen extends Component {
     super(props);
 
     this.state = {
-      subjectSelected: false,
       subjects: []
     };
   }
