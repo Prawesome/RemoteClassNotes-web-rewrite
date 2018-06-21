@@ -5,7 +5,6 @@ import { Card, CardContent } from "@material-ui/core";
 import Button from "@material-ui/core/Button/Button";
 import CardInput from "./CardTextInput";
 import { Redirect, Switch } from "react-router-dom";
-import GridScreen from "./GridScreen";
 import firebase from "./Firebase";
 
 class Login extends React.Component {
@@ -85,12 +84,12 @@ class Login extends React.Component {
     });
   };
 
-  keyPressHandler = (event) => {
-      if(event.keyCode === 13) {
-          this.loginHandler();
-          console.log('Logged');
-      }
-  }
+  keyPressHandler = event => {
+    if (event.keyCode === 13) {
+      this.loginHandler();
+      console.log("Logged");
+    }
+  };
 
   loginHandler = () => {
     firebase
@@ -122,7 +121,7 @@ class Login extends React.Component {
     return (
       <div className="container" onKeyDown={this.keyPressHandler}>
         {/* TODO: IMPROVE THIS. TEMPORARY HACK */}
-        {this.state.isLoggedIn ? <Redirect to="/subjects" /> : ''}
+        {this.state.isLoggedIn ? <Redirect to="/subjects" /> : ""}
         <Typography variant="title" className="card-item" color="primary">
           Remote Class Notes
         </Typography>

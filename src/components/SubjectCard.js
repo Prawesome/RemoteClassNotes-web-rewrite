@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardContent, Typography } from "@material-ui/core";
-import "./GridScreen.css";
+import "./Grid.css";
 
 const SubjectCard = props => (
   <Card className="card">

@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardContent, Typography, Divider } from "@material-ui/core";
-import "./GridScreen.css";
+import "./Grid.css";
 
 const DownloadCard = props => (
   <Card className="card">
