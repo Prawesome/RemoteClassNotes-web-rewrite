@@ -4,6 +4,7 @@ import { GridList, GridListTile } from "@material-ui/core";
 import "./Grid.css";
 import DownloadCard from "./DownloadCard";
 import NavBar from "./NavBar";
+import { Redirect } from "react-router-dom";
 
 class FileScreen extends Component {
   constructor(props) {
@@ -34,6 +35,12 @@ class FileScreen extends Component {
 
   render() {
     let cards;
+
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (!isLoggedIn) {
+      console.log("Redirecting from subjects to login");
+      return <Redirect to="/login" />;
+    }
 
     cards = this.state.files.map((file, index) => (
       <GridListTile key={index} className="grid-item-container">

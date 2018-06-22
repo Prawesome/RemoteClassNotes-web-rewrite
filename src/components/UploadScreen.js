@@ -6,6 +6,14 @@ import "./UploadScreen.css";
 class UploadScreen extends Component {
   //TODO: MULTIPLE FILE SELECTED MANAGER
   render() {
+
+    //TODO: ADMIN FILTERING
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (!isLoggedIn) {
+      console.log("Redirecting from subjects to login");
+      return <Redirect to="/login" />;
+    }
+
     return (
       <div className="root-container">
         <LinearProgress

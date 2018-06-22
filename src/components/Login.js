@@ -25,7 +25,7 @@ class Login extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount() {    
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         localStorage.setItem("isLoggedIn", "true");
@@ -115,13 +115,11 @@ class Login extends React.Component {
   };
 
   render() {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-
-    if(isLoggedIn) {
-      return (
-        <Redirect to='/subjects/' />
-      )
+    if (isLoggedIn === "true") {
+      console.log('Redirecting to subjects');
+      return <Redirect to="/subjects" />;
     }
 
     return (
