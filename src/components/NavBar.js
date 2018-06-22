@@ -1,16 +1,15 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
 import "./Grid.css";
-// import firebase from "./Firebase";
-import { Redirect } from "react-router-dom";
+import firebase from "./Firebase";
+import { Link } from "react-router-dom";
 
 const NavBar = props => {
   const logout = () => {
     console.log("press");
 
-    // firebase.auth().signOut();
-    // localStorage.setItem("isLoggedIn", "false");
-    return <Redirect to="/login" />;
+    firebase.auth().signOut();
+    localStorage.setItem("isLoggedIn", "false");
   };
 
   return (
@@ -19,9 +18,11 @@ const NavBar = props => {
         <Typography variant="headline" color="inherit" className="nav-title">
           {props.title}
         </Typography>
-        <Button onClick={logout} color="inherit">
-          Logout
-        </Button>
+        <Link to="/login" className="link-style-reset">
+          <Button onClick={logout} color="inherit">
+            Logout
+          </Button>
+        </Link>
       </Toolbar>
     </AppBar>
   );

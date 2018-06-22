@@ -25,7 +25,7 @@ class Login extends React.Component {
     };
   }
 
-  componentDidMount() {    
+  componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         localStorage.setItem("isLoggedIn", "true");
@@ -95,6 +95,7 @@ class Login extends React.Component {
         this.state.mail.value,
         this.state.password.value
       )
+      .then(console.log("loggedin"))
       .catch(error => {
         switch (error.code) {
           case "auth/invalid-email":
@@ -118,7 +119,7 @@ class Login extends React.Component {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
 
     if (isLoggedIn === "true") {
-      console.log('Redirecting to subjects');
+      console.log("Redirecting to subjects");
       return <Redirect to="/subjects" />;
     }
 
