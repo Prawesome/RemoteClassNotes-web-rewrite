@@ -15,7 +15,7 @@ class App extends Component {
         <Route path="/login" component={Login} />
         <Route path="/subjects" component={Subjects} />
         <Route path="/files/:subjectId" component={Files} />
-        <Redirect from="/" to="/login" />
+        <Redirect exact from="/" to="/login" />
       </Switch>
     );
   }

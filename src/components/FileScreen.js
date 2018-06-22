@@ -3,6 +3,7 @@ import firebase from "./Firebase";
 import { GridList, GridListTile } from "@material-ui/core";
 import "./Grid.css";
 import DownloadCard from "./DownloadCard";
+import NavBar from "./NavBar";
 
 class FileScreen extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class FileScreen extends Component {
   }
 
   componentWillMount() {
-    this.getData(this.props.match.params.subjectId);    
+    this.getData(this.props.match.params.subjectId);
   }
 
   getData = subject => {
@@ -22,7 +23,7 @@ class FileScreen extends Component {
 
     dbRef.on("child_added", snapshot => {
       const file = snapshot.val();
-      
+
       if (file.subjectName.toLowerCase() === subject.toLowerCase()) {
         this.setState({
           files: [...this.state.files, file]
@@ -41,10 +42,13 @@ class FileScreen extends Component {
     ));
 
     return (
-      <div className="grid-outter-container">
-        <GridList cols={5} className="grid-inner-container">
-          {cards}
-        </GridList>
+      <div>
+        <NavBar title={this.props.match.params.subjectId} />
+        <div className="grid-outter-container">
+          <GridList cols={5} className="grid-inner-container">
+            {cards}
+          </GridList>
+        </div>
       </div>
     );
   }

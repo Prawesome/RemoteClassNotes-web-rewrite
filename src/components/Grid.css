@@ -20,3 +20,11 @@
 .card {
     padding: 1em;
 }
+
+.nav-title {
+    flex: 1 
+}
+
+.nav-margin {
+    margin: 0.35em;
+}

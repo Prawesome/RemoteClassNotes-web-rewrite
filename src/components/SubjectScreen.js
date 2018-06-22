@@ -3,6 +3,7 @@ import "./Grid.css";
 import { GridList, GridListTile } from "@material-ui/core";
 import SubjectCard from "./SubjectCard";
 import firebase from "./Firebase";
+import NavBar from "./NavBar";
 
 class SubjectScreen extends Component {
   constructor(props) {
@@ -32,15 +33,18 @@ class SubjectScreen extends Component {
 
     cards = this.state.subjects.map((subject, index) => (
       <GridListTile key={index} className="grid-item-container">
-        <SubjectCard subject={subject} />
+        <SubjectCard subject={subject} />{" "}
       </GridListTile>
     ));
 
     return (
-      <div className="grid-outter-container">
-        <GridList cols={5} className="grid-inner-container">
-          {cards}
-        </GridList>
+      <div>
+        <NavBar title="Subjects" />
+        <div className="grid-outter-container">
+          <GridList cols={5} className="grid-inner-container">
+            {cards}
+          </GridList>
+        </div>
       </div>
     );
   }
