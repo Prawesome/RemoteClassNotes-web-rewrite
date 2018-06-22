@@ -21,17 +21,14 @@ class Login extends React.Component {
         value: "",
         isError: false,
         errorText: ""
-      },
-      isLoggedIn: false
+      }
     };
   }
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.setState({
-          isLoggedIn: true
-        });
+        localStorage.setItem("isLoggedIn", "true");
       }
     });
   }
@@ -87,7 +84,7 @@ class Login extends React.Component {
   keyPressHandler = event => {
     if (event.keyCode === 13) {
       this.loginHandler();
-      console.log("Logged");
+      console.log("Enter button logged");
     }
   };
 
@@ -118,13 +115,20 @@ class Login extends React.Component {
   };
 
   render() {
+
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+    if(isLoggedIn) {
+      return (
+        <Redirect to='/subjects/' />
+      )
+    }
+
     return (
       <div className="container" onKeyDown={this.keyPressHandler}>
-        {/* TODO: IMPROVE THIS. TEMPORARY HACK */}
-        {this.state.isLoggedIn ? <Redirect to="/subjects" /> : ""}
         <Typography variant="title" className="card-item" color="primary">
-          Remote Class Notes
-        </Typography>
+          Remote Class Notes{" "}
+        </Typography>{" "}
         <Card className="card-container">
           <CardContent>
             <Typography

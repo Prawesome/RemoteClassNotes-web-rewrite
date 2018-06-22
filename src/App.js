@@ -6,8 +6,12 @@ import Files from "./components/FileScreen";
 
 class App extends Component {
   render() {
+    if (!localStorage.getItem("isLoggedIn")) {
+      <Redirect to="/login" />;
+    }
     return (
       <Switch>
+        {/* TODO: IMPLEMENT 404 PAGE */}
         <Route path="/login" component={Login} />
         <Route path="/subjects" component={Subjects} />
         <Route path="/files/:subjectId" component={Files} />
