@@ -10,7 +10,7 @@ class App extends Component {
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/subjects" component={Subjects} />
-        <Route path="/files" component={Files} />
+        <Route path="/files/:subjectId" component={Files} />
         <Redirect from="/" to="/login" />
       </Switch>
     );

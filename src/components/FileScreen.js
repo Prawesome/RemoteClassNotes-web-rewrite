@@ -14,7 +14,7 @@ class FileScreen extends Component {
   }
 
   componentWillMount() {
-    this.getData(this.props.location.state.props.subject);    
+    this.getData(this.props.match.params.subjectId);    
   }
 
   getData = subject => {
@@ -23,7 +23,7 @@ class FileScreen extends Component {
     dbRef.on("child_added", snapshot => {
       const file = snapshot.val();
       
-      if (file.subjectName === subject) {
+      if (file.subjectName.toLowerCase() === subject.toLowerCase()) {
         this.setState({
           files: [...this.state.files, file]
         });

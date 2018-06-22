@@ -10,8 +10,7 @@ const SubjectCard = props => (
         {props.subject}
       </Typography>
       <Link to={{
-        pathname: "/files",
-        state: {props}
+        pathname: `/files/${props.subject}`
       }}>
       <Button variant='raised' color="primary" >Browse</Button>
       </Link>
