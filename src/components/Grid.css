@@ -1,8 +1,6 @@
 .grid-outter-container {
     padding: 1%;
     padding-top: 2%;
-    height: 98%;
-    width: 99%;
 }
 
 .grid-inner-container {
@@ -14,7 +12,6 @@
 
 .grid-item-container {
     margin-left: 0.5em;
-
 }
 
 .card {
@@ -22,11 +19,7 @@
 }
 
 .nav-title {
-    flex: 1 
-}
-
-.nav-margin {
-    margin: 0.35em;
+    flex: 1 ;
 }
 
 .link-style-reset {

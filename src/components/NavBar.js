@@ -11,7 +11,7 @@ const NavBar = props => {
   };
 
   return (
-    <AppBar position="sticky" className="nav-margin">
+    <AppBar position="sticky" >
       <Toolbar>
         <Typography variant="headline" color="inherit" className="nav-title">
           {props.title}
