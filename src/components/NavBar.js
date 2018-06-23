@@ -6,12 +6,14 @@ import { Link } from "react-router-dom";
 
 const NavBar = props => {
   const logout = () => {
-    firebase.auth().signOut();
-    localStorage.setItem("isLoggedIn", "false");
+    firebase
+      .auth()
+      .signOut()
+      .then(localStorage.setItem("isLoggedIn", "false"));
   };
 
   return (
-    <AppBar position="sticky" >
+    <AppBar position="sticky">
       <Toolbar>
         <Typography variant="headline" color="inherit" className="nav-title">
           {props.title}
