@@ -13,16 +13,24 @@ class SubjectScreen extends Component {
     this.state = {
       subjects: []
     };
+
+    this.dbRef;
   }
 
   componentDidMount() {
+    console.log('mounted');
+    
     this.getData();
   }
 
-  getData = () => {
-    const dbRef = firebase.database().ref("/subjects");
+  componentWillUnmount() {
+    this.dbRef.off();
+  }
 
-    dbRef.on("child_added", snapshot => {
+  getData = () => {
+    this.dbRef = firebase.database().ref("/subjects");
+
+    this.dbRef.on("child_added", snapshot => {
       this.setState({
         subjects: [...this.state.subjects, snapshot.val()]
       });
