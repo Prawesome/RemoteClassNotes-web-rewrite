@@ -13,7 +13,7 @@ const NavBar = props => {
         localStorage.setItem("isLoggedIn", "false");
         props.history.push('/login');
       })
-      .catch(err => console.log("Could not redirect", err));
+      .catch(err => console.log("Could not redirect", err)); //TODO: SHOW SOMETHING TO USER
   };
 
   return (

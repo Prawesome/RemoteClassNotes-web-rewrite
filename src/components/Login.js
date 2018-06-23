@@ -1,10 +1,10 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography/Typography";
 import "./Login.css";
-import { Card, CardContent } from "@material-ui/core";
+import { Card, CardContent, CircularProgress } from "@material-ui/core";
 import Button from "@material-ui/core/Button/Button";
 import CardInput from "./CardTextInput";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import firebase from "./Firebase";
 
 class Login extends React.Component {
@@ -22,7 +22,9 @@ class Login extends React.Component {
         isError: false,
         errorText: ""
       },
-      loginListener: false
+      progressControls: {
+        isLoading: false
+      }
     };
   }
 
@@ -82,6 +84,13 @@ class Login extends React.Component {
   };
 
   loginHandler = () => {
+    this.setState({
+      ...this.state,
+      progressControls: {
+        isLoading: true
+      }
+    });
+
     firebase
       .auth()
       .signInWithEmailAndPassword(
@@ -91,9 +100,15 @@ class Login extends React.Component {
       .then(() => {
         console.log("Redirecting to subject after auth");
 
-        localStorage.setItem("isLoggedIn", "true");
-        this.props.history.push('/subjects');
+        this.setState({
+          ...this.state,
+          progressControls: {
+            isLoading: true
+          }
+        });
 
+        localStorage.setItem("isLoggedIn", "true");
+        this.props.history.push("/subjects");
       })
       .catch(error => {
         switch (error.code) {
@@ -110,14 +125,18 @@ class Login extends React.Component {
           default:
             break;
         }
+        this.setState({
+          ...this.state,
+          progressControls: {
+            isLoading: true
+          }
+        });
         console.log(error);
       });
   };
 
   render() {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-
-    if (isLoggedIn === "true" || this.state.loginListener) {
+    if (localStorage.getItem("isLoggedIn") === "true") {
       console.log("Redirecting to subjects");
       return <Redirect to="/subjects" />;
     }
@@ -157,6 +176,9 @@ class Login extends React.Component {
               helperText={this.state.password.errorText}
               icon="Lock"
             />
+            <div className="progress-circle">
+              {this.state.progressControls.isLoading && <CircularProgress />}
+            </div>
             <div className="card-item">
               <Button
                 variant="raised"
@@ -173,4 +195,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

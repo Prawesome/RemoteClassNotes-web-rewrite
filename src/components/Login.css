@@ -19,3 +19,8 @@
 .icon-text-field {
     color: #888888;
 }
+
+.progress-circle {
+    height: fit-content;
+    width: fit-content;
+}
