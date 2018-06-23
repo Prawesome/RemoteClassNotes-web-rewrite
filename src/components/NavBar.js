@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 
 const NavBar = props => {
   const logout = () => {
-    console.log("press");
-
     firebase.auth().signOut();
     localStorage.setItem("isLoggedIn", "false");
   };

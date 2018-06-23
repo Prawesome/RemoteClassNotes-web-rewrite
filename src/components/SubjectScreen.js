@@ -15,7 +15,7 @@ class SubjectScreen extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getData();
   }
 

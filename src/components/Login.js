@@ -4,7 +4,7 @@ import "./Login.css";
 import { Card, CardContent } from "@material-ui/core";
 import Button from "@material-ui/core/Button/Button";
 import CardInput from "./CardTextInput";
-import { Redirect, Switch } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import firebase from "./Firebase";
 
 class Login extends React.Component {
@@ -21,16 +21,9 @@ class Login extends React.Component {
         value: "",
         isError: false,
         errorText: ""
-      }
+      },
+      loginListener: false
     };
-  }
-
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        localStorage.setItem("isLoggedIn", "true");
-      }
-    });
   }
 
   mailFieldHandler = event => {
@@ -95,7 +88,13 @@ class Login extends React.Component {
         this.state.mail.value,
         this.state.password.value
       )
-      .then(console.log("loggedin"))
+      .then(() => {
+        console.log("Redirecting to subject after auth");
+
+        localStorage.setItem("isLoggedIn", "true");
+        this.props.history.push('/subjects');
+
+      })
       .catch(error => {
         switch (error.code) {
           case "auth/invalid-email":
@@ -118,7 +117,7 @@ class Login extends React.Component {
   render() {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-    if (isLoggedIn === "true") {
+    if (isLoggedIn === "true" || this.state.loginListener) {
       console.log("Redirecting to subjects");
       return <Redirect to="/subjects" />;
     }
@@ -126,8 +125,8 @@ class Login extends React.Component {
     return (
       <div className="container" onKeyDown={this.keyPressHandler}>
         <Typography variant="title" className="card-item" color="primary">
-          Remote Class Notes{" "}
-        </Typography>{" "}
+          Remote Class Notes
+        </Typography>
         <Card className="card-container">
           <CardContent>
             <Typography
