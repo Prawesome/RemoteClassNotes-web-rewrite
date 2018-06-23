@@ -2,14 +2,18 @@ import React from "react";
 import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
 import "./Grid.css";
 import firebase from "./Firebase";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 const NavBar = props => {
   const logout = () => {
     firebase
       .auth()
       .signOut()
-      .then(localStorage.setItem("isLoggedIn", "false"));
+      .then(() => {
+        localStorage.setItem("isLoggedIn", "false");
+        props.history.push('/login');
+      })
+      .catch(err => console.log("Could not redirect", err));
   };
 
   return (
@@ -18,14 +22,12 @@ const NavBar = props => {
         <Typography variant="headline" color="inherit" className="nav-title">
           {props.title}
         </Typography>
-        <Link to="/login" className="link-style-reset">
-          <Button onClick={logout} color="inherit">
-            Logout
-          </Button>
-        </Link>
+        <Button onClick={logout} color="inherit">
+          Logout
+        </Button>
       </Toolbar>
     </AppBar>
   );
 };
 
-export default NavBar;
+export default withRouter(NavBar);
