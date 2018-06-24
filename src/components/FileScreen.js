@@ -5,14 +5,19 @@ import "./Grid.css";
 import DownloadCard from "./DownloadCard";
 import NavBar from "./NavBar";
 import { Redirect } from "react-router-dom";
-import ProgressCircle from './FullScreenProgressCircle';
+import FullScreenProgressCircle from "./FullScreenProgressCircle";
 
 class FileScreen extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      files: []
+      data: {
+        files: []
+      },
+      progressControl: {
+        isLoading: true
+      }
     };
   }
 
@@ -28,7 +33,12 @@ class FileScreen extends Component {
 
       if (file.subjectName.toLowerCase() === subject.toLowerCase()) {
         this.setState({
-          files: [...this.state.files, file]
+          data: {
+            files: [...this.state.data.files, file]
+          },
+          progressControl: {
+            isLoading: false
+          }
         });
       }
     });
@@ -43,7 +53,7 @@ class FileScreen extends Component {
       return <Redirect to="/login" />;
     }
 
-    cards = this.state.files.map((file, index) => (
+    cards = this.state.data.files.map((file, index) => (
       <GridListTile key={index} className="grid-item-container">
         <DownloadCard file={file} />
       </GridListTile>
@@ -53,9 +63,13 @@ class FileScreen extends Component {
       <div>
         <NavBar title={this.props.match.params.subjectId} />
         <div className="grid-outter-container">
-          <GridList cols={5} className="grid-inner-container">
-            {cards}
-          </GridList>
+          {this.state.progressControl.isLoading ? (
+            <FullScreenProgressCircle />
+          ) : (
+            <GridList cols={5} className="grid-inner-container">
+              {cards}
+            </GridList>
+          )}
         </div>
       </div>
     );

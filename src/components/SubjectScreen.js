@@ -5,7 +5,7 @@ import SubjectCard from "./SubjectCard";
 import firebase from "./Firebase";
 import NavBar from "./NavBar";
 import { Redirect } from "react-router-dom";
-import ProgressCircle from './FullScreenProgressCircle';
+import FullScreenProgressCircle from './FullScreenProgressCircle';
 
 class SubjectScreen extends Component {
   constructor(props) {
@@ -68,7 +68,7 @@ class SubjectScreen extends Component {
         <NavBar title="Subjects" />
         <div className="grid-outter-container">
           {this.state.progressControl.isLoading ? (
-            <ProgressCircle />
+            <FullScreenProgressCircle />
           ) : (
             <GridList cols={5} className="grid-inner-container">
               {cards}
