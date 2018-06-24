@@ -176,18 +176,21 @@ class Login extends React.Component {
               helperText={this.state.password.errorText}
               icon="Lock"
             />
-            <div className="progress-circle">
-              {this.state.progressControls.isLoading && <CircularProgress />}
-            </div>
-            <div className="card-item">
-              <Button
-                variant="raised"
-                color="primary"
-                onClick={this.loginHandler}
-              >
-                Submit
-              </Button>
-            </div>
+            {this.state.progressControls.isLoading ? (
+              <div className="progress-circle card-center">
+                {<CircularProgress />}
+              </div>
+            ) : (
+              <div className="card-item">
+                <Button
+                  variant="raised"
+                  color="primary"
+                  onClick={this.loginHandler}
+                >
+                  Submit
+                </Button>
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
