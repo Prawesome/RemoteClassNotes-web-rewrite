@@ -103,7 +103,7 @@ class Login extends React.Component {
         this.setState({
           ...this.state,
           progressControls: {
-            isLoading: true
+            isLoading: false
           }
         });
 
@@ -128,7 +128,7 @@ class Login extends React.Component {
         this.setState({
           ...this.state,
           progressControls: {
-            isLoading: true
+            isLoading: false
           }
         });
         console.log(error);
