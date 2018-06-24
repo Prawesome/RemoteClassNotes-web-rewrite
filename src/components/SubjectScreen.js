@@ -5,21 +5,27 @@ import SubjectCard from "./SubjectCard";
 import firebase from "./Firebase";
 import NavBar from "./NavBar";
 import { Redirect } from "react-router-dom";
+import ProgressCircle from './FullScreenProgressCircle';
 
 class SubjectScreen extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      subjects: []
+      data: {
+        subjects: []
+      },
+      progressControl: {
+        isLoading: true
+      }
     };
 
     this.dbRef;
   }
 
   componentDidMount() {
-    console.log('mounted');
-    
+    console.log("mounted");
+
     this.getData();
   }
 
@@ -32,23 +38,28 @@ class SubjectScreen extends Component {
 
     this.dbRef.on("child_added", snapshot => {
       this.setState({
-        subjects: [...this.state.subjects, snapshot.val()]
+        data: {
+          subjects: [...this.state.data.subjects, snapshot.val()]
+        },
+        progressControl: {
+          isLoading: false
+        }
       });
     });
   };
 
   render() {
     let cards;
-    
+
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     if (!isLoggedIn) {
       console.log("Redirecting from subjects to login");
       return <Redirect to="/login" />;
     }
 
-    cards = this.state.subjects.map((subject, index) => (
+    cards = this.state.data.subjects.map((subject, index) => (
       <GridListTile key={index} className="grid-item-container">
-        <SubjectCard subject={subject} />{" "}
+        <SubjectCard subject={subject} />
       </GridListTile>
     ));
 
@@ -56,9 +67,13 @@ class SubjectScreen extends Component {
       <div>
         <NavBar title="Subjects" />
         <div className="grid-outter-container">
-          <GridList cols={5} className="grid-inner-container">
-            {cards}
-          </GridList>
+          {this.state.progressControl.isLoading ? (
+            <ProgressCircle />
+          ) : (
+            <GridList cols={5} className="grid-inner-container">
+              {cards}
+            </GridList>
+          )}
         </div>
       </div>
     );

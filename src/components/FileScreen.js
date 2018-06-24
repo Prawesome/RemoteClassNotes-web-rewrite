@@ -5,6 +5,7 @@ import "./Grid.css";
 import DownloadCard from "./DownloadCard";
 import NavBar from "./NavBar";
 import { Redirect } from "react-router-dom";
+import ProgressCircle from './FullScreenProgressCircle';
 
 class FileScreen extends Component {
   constructor(props) {

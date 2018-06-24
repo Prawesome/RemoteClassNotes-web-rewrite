@@ -1,6 +1,8 @@
 .grid-outter-container {
     padding: 1%;
     padding-top: 2%;
+    height: 80vh;
+    position: relative;
 }
 
 .grid-inner-container {
@@ -19,10 +21,19 @@
 }
 
 .nav-title {
-    flex: 1 ;
+    flex: 1;
 }
 
 .link-style-reset {
     text-decoration: none;
     color: white;
+}
+
+.progress-circle {
+    position: absolute;
+    height: 3em;
+    width: 3em;
+    top: 50%;
+    left: 50%;
+    margin: -1.5em 0 0 -1.5em;
 }
