@@ -1,8 +1,7 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography/Typography";
 import "./Login.css";
-import { Card, CardContent, CircularProgress } from "@material-ui/core";
-import Button from "@material-ui/core/Button/Button";
+import { Card, CardContent, CircularProgress, Button } from "@material-ui/core";
 import CardInput from "./CardTextInput";
 import { Redirect, withRouter } from "react-router-dom";
 import firebase from "./Firebase";
