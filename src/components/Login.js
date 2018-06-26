@@ -27,6 +27,7 @@ class Login extends React.Component {
     };
   }
 
+  //Set value of email field
   mailFieldHandler = event => {
     this.setState({
       mail: {
@@ -36,6 +37,7 @@ class Login extends React.Component {
     });
   };
 
+  //Set value of password field
   passwordFieldHandler = event => {
     this.setState({
       password: {
@@ -45,6 +47,7 @@ class Login extends React.Component {
     });
   };
 
+  //Set error on email field
   setEmailError = () => {
     this.setState({
       mail: {
@@ -55,6 +58,7 @@ class Login extends React.Component {
     });
   };
 
+  //Remove error in email field
   removeEmailError = () => {
     this.setState({
       mail: {
@@ -65,6 +69,7 @@ class Login extends React.Component {
     });
   };
 
+  //Set error on password field
   setPasswordError = () => {
     this.setState({
       password: {
@@ -75,6 +80,7 @@ class Login extends React.Component {
     });
   };
 
+  //Handle enter key press to submit form 
   keyPressHandler = event => {
     if (event.keyCode === 13) {
       this.loginHandler();
@@ -82,6 +88,7 @@ class Login extends React.Component {
     }
   };
 
+  //Executed on login submit
   loginHandler = () => {
     this.setState({
       ...this.state,
@@ -90,6 +97,7 @@ class Login extends React.Component {
       }
     });
 
+    //Firebase sign in action
     firebase
       .auth()
       .signInWithEmailAndPassword(
@@ -106,10 +114,12 @@ class Login extends React.Component {
           }
         });
 
+        //Set as logged in
         localStorage.setItem("isLoggedIn", "true");
         this.props.history.push("/subjects");
       })
       .catch(error => {
+        //Handle login errors
         switch (error.code) {
           case "auth/invalid-email":
           case "auth/user-disabled":
@@ -135,6 +145,8 @@ class Login extends React.Component {
   };
 
   render() {
+
+    // Redirect if user is already logged in
     if (localStorage.getItem("isLoggedIn") === "true") {
       console.log("Redirecting to subjects");
       return <Redirect to="/subjects" />;
@@ -175,6 +187,7 @@ class Login extends React.Component {
               helperText={this.state.password.errorText}
               icon="Lock"
             />
+            {/* Disable button click when button is clicked, TODO: Its buggy */}
             {this.state.progressControls.isLoading ? (
               <div className="progress-circle card-center">
                 {<CircularProgress />}

@@ -3,6 +3,8 @@ import { Card, CardContent, Typography, Button } from "@material-ui/core";
 import "./Grid.css";
 import { Link } from "react-router-dom";
 
+//layout of individual subject cards
+
 const SubjectCard = props => (
   <Card className="card">
     <CardContent>

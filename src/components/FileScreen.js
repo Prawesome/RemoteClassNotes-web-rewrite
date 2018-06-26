@@ -7,6 +7,8 @@ import NavBar from "./NavBar";
 import { Redirect } from "react-router-dom";
 import FullScreenProgressCircle from "./FullScreenProgressCircle";
 
+//file screen which lists all files belonging to a subject
+
 class FileScreen extends Component {
   constructor(props) {
     super(props);
@@ -19,16 +21,25 @@ class FileScreen extends Component {
         isLoading: true
       }
     };
+
+    this.dbRef;
   }
 
+  //get data from firebase
   componentWillMount() {
     this.getData(this.props.match.params.subjectId);
   }
 
-  getData = subject => {
-    const dbRef = firebase.database().ref("/files");
+  componentWillUnmount() {
+    //unlisten to changes in firebase db
+    this.dbRef.off();
+  }
 
-    dbRef.on("child_added", snapshot => {
+  getData = subject => {
+    //get reference to firebase db and listen for child added events
+    this.dbRef = firebase.database().ref("/files");
+
+    this.dbRef.on("child_added", snapshot => {
       const file = snapshot.val();
 
       if (file.subjectName.toLowerCase() === subject.toLowerCase()) {
@@ -44,6 +55,7 @@ class FileScreen extends Component {
     });
   };
 
+  //refer documentation of subject screen
   render() {
     let cards;
 

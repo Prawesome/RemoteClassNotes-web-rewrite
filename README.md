@@ -1,3 +1,12 @@
+##Project Overview
+
+This website is part of a complete solution involving an android applications and this website. 
+
+Technologies used: React, React Router, Firebase(Cloud Functions, Realtime DB, Storage, Notification Service)
+
+##Create React App Information
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

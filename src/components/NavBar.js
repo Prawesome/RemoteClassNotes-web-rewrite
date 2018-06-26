@@ -4,6 +4,8 @@ import "./Grid.css";
 import firebase from "./Firebase";
 import { withRouter } from "react-router-dom";
 
+//Top app bar
+
 const NavBar = props => {
   const logout = () => {
     firebase

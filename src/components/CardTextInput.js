@@ -3,6 +3,8 @@ import { TextField, InputAdornment } from "@material-ui/core/";
 import "./Login.css";
 import { AccountCircle, Lock } from "@material-ui/icons";
 
+//custom input field in cards
+
 class CardTextInput extends Component {
   constructor(props) {
     super(props);
