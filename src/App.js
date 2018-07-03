@@ -3,12 +3,14 @@ import Login from "./components/Login";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Subjects from "./components/SubjectScreen";
 import Files from "./components/FileScreen";
+import Admin from "./components/AdminScreen";
 
 class App extends Component {
   render() {
     return (
       <Switch>
         {/* TODO: IMPLEMENT 404 PAGE */}
+        <Route path="/admin" component={Admin} />
         <Route path="/login" component={Login} />
         <Route path="/subjects" component={Subjects} />
         <Route path="/files/:subjectId" component={Files} />
