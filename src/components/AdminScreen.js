@@ -2,7 +2,16 @@ import React, { Component } from "react";
 import NavBar from "./NavBar";
 import firebase from "./Firebase";
 import FacultyEntry from "./FacultyEntry";
-import { Button, TextField, Table, TableHead, TableCell, TableBody } from "@material-ui/core";
+import "./Grid.css";
+import {
+  Button,
+  TextField,
+  Table,
+  TableHead,
+  TableCell,
+  TableBody,
+  Paper
+} from "@material-ui/core";
 
 class AdminScreen extends Component {
   constructor(props) {
@@ -50,26 +59,28 @@ class AdminScreen extends Component {
     facultyEntries = this.state.faculties.map((faculty, index) => (
       <FacultyEntry key={index} faculty={faculty} />
     ));
-
+// TODO: Needs theming changes. duh
     return (
       <div>
         <NavBar title="Admin Dashboard" />
-        <TextField
-            value={this.state.currentFaculty}
-            onChange={this.facultyFieldHandler}
-          />
-          <Button variant="raised" color="primary" onClick={this.addFaculty}>
-            Add Faculty
-          </Button>
-        <Table>
-          <TableHead>
-            <TableCell>Faculty</TableCell>
-            <TableCell>Approve</TableCell>
-          </TableHead>
-          <TableBody>
-            {facultyEntries}
-          </TableBody>
-        </Table>
+        <div className="grid-outter-container">
+          <Paper>
+            <TextField
+              value={this.state.currentFaculty}
+              onChange={this.facultyFieldHandler}
+            />
+            <Button variant="raised" color="primary" onClick={this.addFaculty}>
+              Add Faculty
+            </Button>
+            <Table>
+              <TableHead>
+                <TableCell>Faculty</TableCell>
+                <TableCell>Approve</TableCell>
+              </TableHead>
+              <TableBody>{facultyEntries}</TableBody>
+            </Table>
+          </Paper>
+        </div>
       </div>
     );
   }

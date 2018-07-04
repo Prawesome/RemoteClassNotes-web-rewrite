@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Checkbox } from '@material-ui/core';
+import { Checkbox, TableRow, TableCell } from '@material-ui/core';
 
 const FacultyEntry = props => {
 
@@ -8,10 +8,10 @@ const FacultyEntry = props => {
     };
 
     return (
-        <tr>
-            <td>{props.faculty}</td>
-            <td><Checkbox checked={true} onChange={facultyHandler} /></td>
-        </tr>
+        <TableRow>
+            <TableCell>{props.faculty}</TableCell>
+            <TableCell><Checkbox checked={true} onChange={facultyHandler} /></TableCell>
+        </TableRow>
     )
 };
 
