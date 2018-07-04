@@ -1,18 +1,31 @@
-import React, { Component } from 'react';
-import { Checkbox, TableRow, TableCell } from '@material-ui/core';
+import React, { Component } from "react";
+import { Checkbox, TableRow, TableCell } from "@material-ui/core";
 
-const FacultyEntry = props => {
+class FacultyEntry extends Component {
+  constructor(props) {
+    super(props);
 
-    const facultyHandler = () => {
-        console.log('grdgduriguidrjg');
+    this.state = {
+        isChecked = false
     };
+  }
 
+  facultyHandler = () => {
+    this.setState({
+        isChecked: !this.state.isChecked
+    });
+  };
+
+  render() {
     return (
-        <TableRow>
-            <TableCell>{props.faculty}</TableCell>
-            <TableCell><Checkbox checked={true} onChange={facultyHandler} /></TableCell>
-        </TableRow>
-    )
-};
+      <TableRow>
+        <TableCell>{props.faculty}</TableCell>
+        <TableCell>
+          <Checkbox checked={true} onChange={facultyHandler} />
+        </TableCell>
+      </TableRow>
+    );
+  }
+}
 
 export default FacultyEntry;
