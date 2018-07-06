@@ -6,7 +6,7 @@ class FacultyEntry extends Component {
     super(props);
 
     this.state = {
-        isChecked = false
+        isChecked: false
     };
   }
 
@@ -19,9 +19,9 @@ class FacultyEntry extends Component {
   render() {
     return (
       <TableRow>
-        <TableCell>{props.faculty}</TableCell>
+        <TableCell>{this.props.faculty}</TableCell>
         <TableCell>
-          <Checkbox checked={true} onChange={facultyHandler} />
+          <Checkbox checked={true} onChange={this.facultyHandler} />
         </TableCell>
       </TableRow>
     );
