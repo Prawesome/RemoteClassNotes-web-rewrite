@@ -80,7 +80,7 @@ class Login extends React.Component {
     });
   };
 
-  //Handle enter key press to submit form 
+  //Handle enter key press to submit form
   keyPressHandler = event => {
     if (event.keyCode === 13) {
       this.loginHandler();
@@ -145,7 +145,6 @@ class Login extends React.Component {
   };
 
   render() {
-
     // Redirect if user is already logged in
     if (localStorage.getItem("isLoggedIn") === "true") {
       console.log("Redirecting to subjects");
@@ -188,12 +187,11 @@ class Login extends React.Component {
               icon="Lock"
             />
             {/* Disable button click when button is clicked, TODO: Its buggy */}
-            {this.state.progressControls.isLoading ? (
-              <div className="progress-circle card-center">
-                {<CircularProgress />}
-              </div>
-            ) : (
-              <div className="card-item">
+            <div className="card-item">
+              
+              {this.state.progressControls.isLoading ? (
+                <CircularProgress />
+              ) : (
                 <Button
                   variant="raised"
                   color="primary"
@@ -201,8 +199,8 @@ class Login extends React.Component {
                 >
                   Submit
                 </Button>
-              </div>
-            )}
+              )}
+            </div>
           </CardContent>
         </Card>
       </div>

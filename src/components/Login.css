@@ -16,15 +16,6 @@
     margin: 2em 0.75em;
 }
 
-.card-center {
-    text-align: center;
-}
-
 .icon-text-field {
     color: #888888;
-}
-
-.progress-circle {
-    height: fit-content;
-    width: 100%;
 }
