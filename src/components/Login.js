@@ -1,7 +1,12 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography/Typography";
 import "./Login.css";
-import { Card, CardContent, CircularProgress, Button } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  CircularProgress,
+  Button,
+  Typography
+} from "@material-ui/core";
 import CardInput from "./CardTextInput";
 import { Redirect, withRouter } from "react-router-dom";
 import firebase from "./Firebase";
@@ -105,18 +110,15 @@ class Login extends React.Component {
         this.state.password.value
       )
       .then(() => {
-        console.log("Redirecting to subject after auth");
+        if (this.props.match.path === "/faculty/login") {          
+          this.props.history.push("/faculty/subjects");
+        } else if (this.props.match.path === "/login") {
+          console.log("Redirecting to subject after auth");
 
-        this.setState({
-          ...this.state,
-          progressControls: {
-            isLoading: false
-          }
-        });
-
-        //Set as logged in
-        localStorage.setItem("isLoggedIn", "true");
-        this.props.history.push("/subjects");
+          //Set as logged in
+          localStorage.setItem("isLoggedIn", "true");
+          this.props.history.push("/subjects");
+        }
       })
       .catch(error => {
         //Handle login errors
@@ -186,9 +188,7 @@ class Login extends React.Component {
               helperText={this.state.password.errorText}
               icon="Lock"
             />
-            {/* Disable button click when button is clicked, TODO: Its buggy */}
             <div className="card-item">
-              
               {this.state.progressControls.isLoading ? (
                 <CircularProgress />
               ) : (
