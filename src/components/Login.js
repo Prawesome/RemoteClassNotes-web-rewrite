@@ -30,6 +30,8 @@ class Login extends React.Component {
         isLoading: false
       }
     };
+
+    this.dbRef;
   }
 
   //Set value of email field
@@ -110,7 +112,19 @@ class Login extends React.Component {
         this.state.password.value
       )
       .then(() => {
-        if (this.props.match.path === "/faculty/login") {          
+        if (this.props.match.path === "/faculty/login") {
+
+          // TODO: dummy code to check for faculty at login
+
+          this.dbRef = firebase.database().ref("/faculties");
+          this.dbRef.once('child_added').then(snapshot => {
+            snapshot.forEach( element => {
+              if(element.val() === this.state.mail.value) {
+                this.props.history.push("/faculty/subjects");
+              }
+            })
+          }).catch(err => console.log())
+
           this.props.history.push("/faculty/subjects");
         } else if (this.props.match.path === "/login") {
           console.log("Redirecting to subject after auth");
