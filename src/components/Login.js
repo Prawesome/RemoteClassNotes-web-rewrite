@@ -5,10 +5,17 @@ import {
   CardContent,
   CircularProgress,
   Button,
-  Typography
+  Typography,
+  Tabs,
+  AppBar,
+  Tab
 } from "@material-ui/core";
 import CardInput from "./CardTextInput";
-import { Redirect, withRouter } from "react-router-dom";
+import {
+  Redirect,
+  withRouter
+} from "react-router-dom";
+import SwipeableViews from "react-swipeable-views";
 import firebase from "./Firebase";
 
 class Login extends React.Component {
@@ -28,7 +35,8 @@ class Login extends React.Component {
       },
       progressControls: {
         isLoading: false
-      }
+      },
+      tabIndex: 0
     };
 
     this.dbRef;
@@ -95,6 +103,20 @@ class Login extends React.Component {
     }
   };
 
+  //Handle tabChange
+  tabChangeHandler = (event, value) => {
+    this.setState({
+      tabIndex: value
+    });
+  }
+
+  //Handle view swipe
+  swipeIndexChangeHandler = (index) => {
+    this.setState({
+      tabIndex: index
+    })
+  }
+
   //Executed on login submit
   loginHandler = () => {
     this.setState({
@@ -118,8 +140,8 @@ class Login extends React.Component {
 
           this.dbRef = firebase.database().ref("/faculties");
           this.dbRef.once('child_added').then(snapshot => {
-            snapshot.forEach( element => {
-              if(element.val() === this.state.mail.value) {
+            snapshot.forEach(element => {
+              if (element.val() === this.state.mail.value) {
                 this.props.history.push("/faculty/subjects");
               }
             })
@@ -168,53 +190,103 @@ class Login extends React.Component {
     }
 
     return (
-      <div className="container" onKeyDown={this.keyPressHandler}>
-        <Typography variant="title" className="card-item" color="primary">
+      <div className="container"
+        onKeyDown={this.keyPressHandler} >
+        <Typography variant="title"
+          className="card-item"
+          color="secondary">
           Remote Class Notes
-        </Typography>
-        <Card className="card-container">
-          <CardContent>
-            <Typography
-              variant="headline"
-              color="primary"
-              className="card-item"
+          </Typography>
+        <Card>
+          <AppBar position="static" >
+            <Tabs value={this.state.tabIndex}
+              onChange={this.tabChangeHandler}
+              centered={true}
+              fullWidth={true} >
+              <Tab label="Login" />
+              <Tab label="Sign Up" />
+            </Tabs>
+          </AppBar>
+          <CardContent className="card-container">
+            <SwipeableViews
+              axis={'x'}
+              index={this.state.tabIndex}
+              onChangeIndex={this.swipeIndexChangeHandler}
             >
-              Login
-            </Typography>
-            <CardInput
-              name="login-email"
-              placeholder="Email ID"
-              type="email"
-              autoFocus={true}
-              onChange={this.mailFieldHandler}
-              value={this.state.mail.value}
-              error={this.state.mail.isError}
-              helperText={this.state.mail.errorText}
-              icon="AccountCircle"
-            />
-            <CardInput
-              name="login-password"
-              placeholder="Password"
-              type="password"
-              onChange={this.passwordFieldHandler}
-              value={this.state.password.value}
-              error={this.state.password.isError}
-              helperText={this.state.password.errorText}
-              icon="Lock"
-            />
-            <div className="card-item">
-              {this.state.progressControls.isLoading ? (
-                <CircularProgress />
-              ) : (
-                <Button
-                  variant="raised"
+              <div>
+                <Typography variant="headline"
                   color="primary"
-                  onClick={this.loginHandler}
-                >
-                  Submit
-                </Button>
-              )}
-            </div>
+                  className="card-item" >
+                  Login
+                </Typography>
+                <CardInput name="login-email"
+                  placeholder="Email ID"
+                  type="email"
+                  autoFocus={true}
+                  onChange={this.mailFieldHandler}
+                  value={this.state.mail.value}
+                  error={this.state.mail.isError}
+                  helperText={this.state.mail.errorText}
+                  icon="AccountCircle" />
+                <CardInput name="login-password"
+                  placeholder="Password"
+                  type="password"
+                  onChange={this.passwordFieldHandler}
+                  value={this.state.password.value}
+                  error={this.state.password.isError}
+                  helperText={this.state.password.errorText}
+                  icon="Lock" />
+                <div className="card-item" >
+                  {this.state.progressControls.isLoading ? (
+                    <CircularProgress />
+                  ) : (
+                      <Button variant="raised"
+                        color="primary"
+                        onClick={this.loginHandler} >
+                        Submit
+                      </Button>
+                    )
+                  }
+                </div>
+              </div>
+              <div>
+                <Typography variant="headline"
+                  color="primary"
+                  className="card-item" >
+                  Sign Up
+                </Typography>
+                <CardInput name="sign-up-email"
+                  placeholder="Email ID"
+                  type="email"
+                  autoFocus={true}
+                  onChange={this.mailFieldHandler}
+                  value={this.state.mail.value}
+                  error={this.state.mail.isError}
+                  helperText={this.state.mail.errorText}
+                  icon="AccountCircle" />
+                <CardInput name="sign-up-password"
+                  placeholder="Password"
+                  type="password"
+                  onChange={this.passwordFieldHandler} login
+                  value={this.state.password.value}
+                  error={this.state.password.isError}
+                  helperText={this.state.password.errorText}
+                  icon="Lock" />
+                <div className="card-item" >
+                  {this.state.progressControls.isLoading ? (
+                    <CircularProgress />
+                  ) : (
+                      <Button variant="raised"
+                        color="primary"
+                        onClick={this.loginHandler} >
+                        Sign Up
+                      </Button>
+                    )
+                  }
+                </div>
+              </div>
+            </SwipeableViews>
+
           </CardContent>
         </Card>
       </div>
