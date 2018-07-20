@@ -1,14 +1,10 @@
 import React from "react";
 import "./Login.css";
 import {
-  Card,
-  CardContent,
   CircularProgress,
   Button,
   Typography,
-  Tabs,
-  AppBar,
-  Tab
+  Snackbar
 } from "@material-ui/core";
 import CardInput from "./CardTextInput";
 import {
@@ -33,9 +29,16 @@ class SignUpForm extends React.Component {
         isError: false,
         errorText: ""
       },
+      confirmPassword: {
+        value: "",
+        isError: false,
+        errorText: ""
+      },
+      buttonDisabled: true,
       progressControls: {
         isLoading: false
       },
+      snackbarOpened: false,
       tabIndex: 0
     };
 
@@ -60,6 +63,27 @@ class SignUpForm extends React.Component {
         value: event.target.value
       }
     });
+  };
+
+  // TODO: BUGGY IMPLEMENTATION, CONFIRM PASSWORD ALWAYS DISABLED
+  //Set value of confirm password field
+  confirmPasswordFieldHandler = event => {
+    this.setState({
+      confirmPassword: {
+        ...this.state.confirmPassword,
+        value: event.target.value
+      }
+    });
+
+    if (this.state.password.value === this.state.confirmPassword.value) {
+      this.setState({
+        buttonDisabled: false
+      })
+    } else {
+      this.setState({
+        buttonDisabled: true
+      })
+    }
   };
 
   //Set error on email field
@@ -104,8 +128,15 @@ class SignUpForm extends React.Component {
     }
   };
 
+  // close the sandwich
+  closeSnackbar = () => {
+    this.setState({
+      snackbarOpened: false
+    })
+  }
+
   //Executed on login submit
-  loginHandler = () => {
+  signUpHandler = () => {
     this.setState({
       ...this.state,
       progressControls: {
@@ -116,32 +147,22 @@ class SignUpForm extends React.Component {
     //Firebase sign in action
     firebase
       .auth()
-      .signInWithEmailAndPassword(
+      .createUserWithEmailAndPassword(
         this.state.mail.value,
         this.state.password.value
       )
       .then(() => {
-        if (this.props.match.path === "/faculty/login") {
-
-          // TODO: dummy code to check for faculty at login
-
-          this.dbRef = firebase.database().ref("/faculties");
-          this.dbRef.once('child_added').then(snapshot => {
-            snapshot.forEach(element => {
-              if (element.val() === this.state.mail.value) {
-                this.props.history.push("/faculty/subjects");
-              }
-            })
-          }).catch(err => console.log())
-
-          this.props.history.push("/faculty/subjects");
-        } else if (this.props.match.path === "/login") {
-          console.log("Redirecting to subject after auth");
-
-          //Set as logged in
-          localStorage.setItem("isLoggedIn", "true");
-          this.props.history.push("/subjects");
-        }
+        firebase.auth().currentUser.sendEmailVerification().then(() => {
+          if (this.props.match.path === "/faculty/login") {
+            this.props.history.push("/faculty/approval");
+          } else if (this.props.match.path === "/login") {
+            this.props.history.push("/approval");
+          }
+        }).catch(error => {
+          this.setState({
+            snackbarOpened: true
+          })
+        })
       })
       .catch(error => {
         //Handle login errors
@@ -177,7 +198,7 @@ class SignUpForm extends React.Component {
           color="primary"
           className="card-item" >
           Sign Up
-                </Typography>
+        </Typography>
         <CardInput name="sign-up-email"
           placeholder="Email ID"
           type="email"
@@ -190,23 +211,37 @@ class SignUpForm extends React.Component {
         <CardInput name="sign-up-password"
           placeholder="Password"
           type="password"
-          onChange={this.passwordFieldHandler} login
+          onChange={this.passwordFieldHandler}
           value={this.state.password.value}
           error={this.state.password.isError}
           helperText={this.state.password.errorText}
+          icon="Lock" />
+        <CardInput name="sign-up-confirm-password"
+          placeholder="Confirm Password"
+          type="password"
+          onChange={this.confirmPasswordFieldHandler}
+          value={this.state.confirmPassword.value}
+          error={this.state.confirmPassword.isError}
           icon="Lock" />
         <div className="card-item" >
           {this.state.progressControls.isLoading ? (
             <CircularProgress />
           ) : (
-              <Button variant="raised"
+              <Button id="btn-signup"
+                variant="raised"
                 color="primary"
-                onClick={this.loginHandler} >
+                onClick={this.signUpHandler}
+                disabled={this.state.buttonDisabled} >
                 Sign Up
-                      </Button>
+              </Button>
             )
           }
         </div>
+        <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+          open={this.state.snackbarOpened}
+          autoHideDuration={6000}
+          onClose={this.closeSnackbar} 
+          message={<span>An unexpected error. Try again</span>}/>
       </div>
     );
   }
