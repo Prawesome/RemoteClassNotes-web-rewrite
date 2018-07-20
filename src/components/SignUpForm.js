@@ -34,7 +34,7 @@ class SignUpForm extends React.Component {
         isError: false,
         errorText: ""
       },
-      buttonDisabled: true,
+      buttonDisabled: false,
       progressControls: {
         isLoading: false
       },
@@ -87,12 +87,12 @@ class SignUpForm extends React.Component {
   };
 
   //Set error on email field
-  setEmailError = () => {
+  setEmailError = (errorText) => {
     this.setState({
       mail: {
         ...this.state.mail,
         isError: true,
-        errorText: "Badly formatted email"
+        errorText: errorText
       }
     });
   };
@@ -114,7 +114,7 @@ class SignUpForm extends React.Component {
       password: {
         ...this.state.password,
         isError: true,
-        errorText: "Incorrect email or password"
+        errorText: "Password should be at least 6 characters long!"
       }
     });
   };
@@ -144,6 +144,7 @@ class SignUpForm extends React.Component {
       }
     });
 
+    // TODO: Snackbar is not visible!
     //Firebase sign in action
     firebase
       .auth()
@@ -167,13 +168,16 @@ class SignUpForm extends React.Component {
       .catch(error => {
         //Handle login errors
         switch (error.code) {
-          case "auth/invalid-email":
-          case "auth/user-disabled":
-          case "auth/user-not-found":
-          case "auth/argument-error":
-            this.setEmailError();
+          case "auth/email-already-in-use":
+            this.setEmailError("EMAIL already in use");
             break;
-          case "auth/wrong-password":
+          case "auth/invalid-email":
+            this.setEmailError("EMAIL invalid");
+            break;
+          case "auth/operation-not-allowed":
+            this.setEmailError("Invalid operation");
+            break;
+          case "auth/weak-password":
             this.setPasswordError();
             this.removeEmailError();
             break;
