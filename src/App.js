@@ -5,6 +5,7 @@ import Subjects from "./components/SubjectScreen";
 import Files from "./components/FileScreen";
 import Admin from "./components/AdminScreen";
 import NavBar from "./components/NavBar";
+import Approval from "./components/ApprovalScreen";
 
 class App extends Component {
   render() {
@@ -13,6 +14,8 @@ class App extends Component {
         {/* TODO: IMPLEMENT 404 PAGE */}
         <Route path="/admin" component={Admin} />
         <Route path="/login" component={Login} />
+        <Route path="/approval" component={Approval} />
+        <Route path="/faculty/approval" component={Approval} />
         <Route path="/faculty/login" component={Login} />
         <Route path="/faculty/subjects" component={NavBar} />
         <Route path="/subjects" component={Subjects} />

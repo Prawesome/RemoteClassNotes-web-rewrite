@@ -155,6 +155,9 @@ class SignUpForm extends React.Component {
       .then(() => {
         firebase.auth().currentUser.sendEmailVerification().then(() => {
           if (this.props.match.path === "/faculty/login") {
+
+            firebase.database().ref('approvalWait').push(this.state.mail.value);
+
             this.props.history.push("/faculty/approval");
           } else if (this.props.match.path === "/login") {
             this.props.history.push("/approval");
@@ -241,11 +244,12 @@ class SignUpForm extends React.Component {
             )
           }
         </div>
+        {/* TODO: Fix this */}
         <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
           open={this.state.snackbarOpened}
           autoHideDuration={6000}
-          onClose={this.closeSnackbar} 
-          message={<span>An unexpected error. Try again</span>}/>
+          onClose={this.closeSnackbar}
+          message={<span>An unexpected error. Try again</span>} />
       </div>
     );
   }
